@@ -233,7 +233,7 @@ Only use `!` when strictly necessary. For instance if a property value can not b
 > Explicit optionals are safer whereas Implicit unwrapping optionals will crash at runtime if the value is nil.
 
 ```swift
-class BaseCell : UITableViewCell
+class BaseCell: UITableViewCell
     // Every BaseCell has a baseRow value that is set up by a external library right after BaseCell init is invoked.
     var baseRow: BaseRow!
 }
@@ -412,7 +412,7 @@ We use implicit getters if a computed property or subscript is read-only.
 
 **prefered**
 ```swift
-var hasEngine : Bool {
+var hasEngine: Bool {
     return true
 }
 
@@ -423,7 +423,7 @@ subscript(index: Int) -> Passenger {
 
 **not prefered**
 ```swift
-var hasEngine : Bool {
+var hasEngine: Bool {
     get {
         return true
     }
