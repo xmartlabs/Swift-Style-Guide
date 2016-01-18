@@ -450,6 +450,28 @@ public enum HeaderFooterType {
 }
 ```
 
+##### shorter dot syntax
+
+Usually enum type can be infered and in these cases we prefer the short dot syntax over long typed syntax.
+
+
+**prefered**
+
+```swift
+var directionToHead = CompassPoint.West // same as var directionToHead: CompassPoint = .West
+directionToHead = .East
+..
+headToDirection(.West)
+```
+
+**not prefered**
+
+```swift
+var directionToHead = CompassPoint.West
+directionToHead = CompassPoint.East // here the type of directionToHead is already know so the CompassPoint type is unnecessary.
+headtoDirection(CompassPoint.West)
+```
+
 #### Strings
 
 String interpolation is prefered over string concatenation using +
