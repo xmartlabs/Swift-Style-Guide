@@ -371,6 +371,21 @@ init() {
 
 ```
 
+
+Don't specify property type if it can be inferred.
+
+**prefered**
+
+```swift
+var dismissViewControllerWhenDone = false
+```
+
+**not prefered**
+
+```swift
+var dismissViewControllerWhenDone: Bool  = false
+```
+
 Array property declaration:
 
 **prefered**
@@ -452,7 +467,7 @@ public enum HeaderFooterType {
 
 ##### shorter dot syntax
 
-Usually enum type can be infered and in these cases we prefer the short dot syntax over long typed syntax.
+Usually enum type can be inferred and in these cases we prefer the short dot syntax over long typed syntax.
 
 
 **prefered**
