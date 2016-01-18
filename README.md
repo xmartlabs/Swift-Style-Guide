@@ -527,6 +527,33 @@ let message = "\(multiplier) times 2.5 is \(Double(multiplier) * 2.5)"
 let message = String(multiplier) + " times 2.5 is " + String(Double(multiplier) * 2.5)
 ```
 
+#### Error Handling
+
+##### try? - Converting Errors to Optional Values
+
+Use try? to write concise error handling code when you want to handle all errors in the same way.
+
+> You use try? to handle an error by converting it to an optional value. If an error is thrown while evaluating the try? expression, the value of the expression is nil.
+
+**prefered**
+
+```swift
+let x = try? someThrowingFunction() ?? []
+```
+
+**not prefered**
+
+```swift
+var x
+do {
+  x = try someThrowingFunction()
+}
+catch {
+  x = []
+}
+```
+
+
 --------------------------------------------
 
 Some of the style and syntaxis conventions we follow are checked using [SwiftLint](https://github.com/realm/SwiftLint) realm project.
