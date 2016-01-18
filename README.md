@@ -450,6 +450,21 @@ public enum HeaderFooterType {
 }
 ```
 
+#### Strings
+
+String interpolation is prefered over string concatenation using +
+
+**prefered**
+
+```swift
+let message = "\(multiplier) times 2.5 is \(Double(multiplier) * 2.5)"
+```
+
+**not prefered**
+```swift
+let message = String(multiplier) + " times 2.5 is " + String(Double(multiplier) * 2.5)
+```
+
 --------------------------------------------
 
 Some of the style and syntaxis conventions we follow are checked using [SwiftLint](https://github.com/realm/SwiftLint) realm project.
