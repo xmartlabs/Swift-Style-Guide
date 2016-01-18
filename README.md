@@ -472,6 +472,31 @@ directionToHead = CompassPoint.East // here the type of directionToHead is alrea
 headtoDirection(CompassPoint.West)
 ```
 
+##### Multiple cases in the same line
+
+Whenever possible use multiple cases in the same line.
+
+**prefered**
+```swift
+switch service {
+case .ChangeEmail, .ChangeUserName:
+  return .POST
+}
+```
+
+**not prefered**
+
+```swift
+switch service {
+case .ChangeEmail:
+  return .POST
+case .ChangeUserName:
+  return .POST
+}
+```
+
+Sometimes more than one option share the same switch case logic
+
 #### Strings
 
 String interpolation is prefered over string concatenation using +
