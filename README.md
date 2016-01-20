@@ -4,7 +4,7 @@ Swift language style guide &amp; coding conventions followed by xmartlabs.com te
 
 The goals of this guide are:
 
-1. Be syntactically consistent on how we write swift code no matters who has worked on.
+1. Be syntactically consistent on how we write swift code no matter who does it.
 2. Write readable and maintainable code.
 3. Focus on real software problems rather than on how we style the code.
 
@@ -122,11 +122,12 @@ if let vehicle = vehicle {
 }
 ```
 
+**not prefered**
+
 ```swift
 if vehicle != nil {
   parkVehicle(vehicle!)
 }
-
 ```
 
 #### Multiple optional Binding & where usage
@@ -257,7 +258,6 @@ Whenever possible prefer to use `for-in` statements over traditional for c-style
 for index in 1..<5 {
   ...
 }
-
 ```
 
 **not prefered**
@@ -285,7 +285,6 @@ for (index, item) in items().enumerate() {
 **not prefered**
 
 ```swift
-
 for var index = 0; index < items.count; i++ {
   let item = items[index]
   segmentedControl.insertSegmentWithTitle(item, atIndex: index, animated: false)
@@ -301,7 +300,7 @@ Use `guard` if some condition must be true to continue the execution of a method
 **prefered**
 
 ```swift
-func getOutPasseger(person: Person) {
+func getOutPassenger(person: Person) {
     guard passenger.contains(person) && vehicle.driver != person else {
         return
     }
@@ -312,7 +311,7 @@ func getOutPasseger(person: Person) {
 **not prefered**
 
 ```swift
-func getOutPasseger(person: Person) {
+func getOutPassenger(person: Person) {
     if !passenger.contains(person) || vehicle.driver == person else {
         return
     }
@@ -322,7 +321,7 @@ func getOutPasseger(person: Person) {
 
 ### Protocols
 
-Whenever possible conforms a protocol through a extension. Use one extension per protocol conformance.
+Whenever possible conform to a protocol through an extension. Use one extension per protocol conformance.
 
 **prefered**
 
@@ -465,7 +464,7 @@ public enum HeaderFooterType {
 }
 ```
 
-##### shorter dot syntax
+##### Shorter dot syntax
 
 Usually enum type can be inferred and in these cases we prefer the short dot syntax over long typed syntax.
 
@@ -544,7 +543,7 @@ let x = try? someThrowingFunction() ?? []
 **not prefered**
 
 ```swift
-var x
+var x : [AnyObject]
 do {
   x = try someThrowingFunction()
 }
