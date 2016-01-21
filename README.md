@@ -38,11 +38,151 @@ func accelerate_vehicleTo(speed: Double) {
 }
 ```
 
+### Line-wrapping
+
+#### Where to break
+
+The prime directive of line-wrapping is: prefer to break at a higher syntactic level. Also:
+
+1. When a line is broken at a non-assignment operator the break comes before the symbol.
+    * This also applies to the following "operator-like" symbols: the dot separator (.).
+2. When a line is broken at an assignment operator the break typically comes after the symbol, but either way is acceptable.
+3. A method or constructor name stays attached to the open parenthesis (() that follows it.
+4. A comma (,) stays attached to the token that precedes it.
+
+#### Indent continuation lines at least +4 spaces
+
+When line-wrapping, each line after the first (each continuation line) is indented at least +4 from the original line.
+
+**preferred**
+
+```swift
+    func ownersOfCarsWithoutFuel(cars: [Car]) -> [Owner] {
+      return cars.filter { $0.fuelLevel == 0 }
+                 .map { $0.owner }
+    }
+```
+
+**not preferred**
+
+```swift
+    func ownersOfCarsWithoutFuel(cars: [Car]) -> [Owner] {
+      return cars.filter { $0.fuelLevel == 0 }
+        .map { $0.owner }
+    }
+```
+
+When there are multiple continuation lines, indentation may be varied beyond +4 as desired. In general, two continuation lines use the same indentation level if and only if they begin with syntactically parallel elements.
+
 ### Whitespace
 
 * Tabs, not spaces.
 * Always end a file with a newline.
 * Never leave trailing whitespace.
+
+#### Vertical Whitespace
+
+A single blank line appears:
+
+1. Between consecutive members (or initializers) of a class: fields, constructors, methods, nested classes, static initializers, instance initializers.
+    * **Exception**: A blank line between two consecutive fields (having no other code between them) is optional. Such blank lines are used as needed to create logical groupings of fields.
+2. Within method bodies, as needed to create logical groupings of statements.
+3. Before the first member and after the last member of the class.
+4. As required by other sections of this document.
+
+Multiple consecutive blank lines are not permitted.
+
+Next reserved words won't start in a new line: else, catch
+
+#### Horizontal whitespace
+
+Beyond where required by the language or other style rules, and apart from literals, comments and doc, a single ASCII space also appears in the following places only.
+
+1. Separating any reserved word, such as if, from an open parenthesis (() that follows it on that line
+2. Separating any reserved word, such as else or catch, from a closing curly brace (}) that precedes it on that line
+3. Before any open curly brace ({):
+4. On both sides of any binary or ternary operator. This also applies to the following "operator-like" symbols:
+    * the colon (:) in an inline if
+5. After (,:) or the closing parenthesis ()) of a cast
+6. On both sides of the double slash (//) that begins an end-of-line comment. Here, multiple spaces are allowed, but not required.
+
+A whitespace before colon (:) in a property declaration, class inheritance declaration and arguments labels declaration **must not** be added
+
+**preferred**
+
+```swift
+class Car: Vehicle {
+
+    let numberOfDoors: Int
+    let maxSpeed: Float
+
+    let brand: String?
+    let model: String?
+
+    var fuelLevel = 0
+    var temperature = 0.0
+
+    init(numberOfDoors: Int, maxSpeed: Float, brand: String?, model: String?) {
+        super.init()
+        self.numberOfDoors = numberOfDoors
+        self.maxSpeed = maxSpeed
+        self.brand = brand
+        self.model = model
+    }
+
+    func fuelStatusDescription() -> String {
+        if fuelLevel < 0.1 {
+            return "\(Warning), not enough fuel!"
+        } else {
+            return "Enough fuel to travel."
+        }
+    }
+
+    func temperatureStatusDescription() -> String {
+      return temperature > 28 ? "To much hot, turn on air conditioner" : "Great temperature condition"
+    }
+}
+```
+
+**not preferred**
+
+```swift
+class Car : Vehicle {
+    let numberOfDoors : Int
+
+    let maxSpeed : Float
+
+    let brand : String?
+
+    let model : String?
+
+    var fuelLevel = 0
+
+
+    var temperature = 0.0
+
+    init(numberOfDoors: Int, maxSpeed: Float, brand: String?, model: String?) {
+        super.init()
+        self.numberOfDoors = numberOfDoors
+        self.maxSpeed = maxSpeed
+        self.brand = brand
+        self.model = model
+    }
+
+    func fuelStatusDescription() -> String {
+        if fuelLevel < 0.1{
+            return "\(Warning), not enough fuel!"
+        }
+        else{
+            return "Enough fuel to travel."
+        }
+    }
+
+    func temperatureStatusDescription() -> String {
+      return temperature > 28 ? "To much hot, turn on air conditioner":"Great temperature condition"
+    }
+}
+```
 
 ### Semicolon
 
