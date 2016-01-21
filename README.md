@@ -60,6 +60,24 @@ let numberOfWheels = 4
 let numberOfWheels = 4;
 ```
 
+### Methods
+
+If a method returns `Void` we omit the return value.
+
+**prefered**
+```swift
+func accelerateVehicleTo(speed: Double) {
+..
+.
+```
+
+**not prefered**
+```swift
+func accelerateVehicleTo(speed: Double) -> Void {
+..
+.
+```
+
 ### let vs var
 
 Always use `let` if a variable value won't change.
