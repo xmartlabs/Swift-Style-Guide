@@ -87,7 +87,7 @@ A single blank line appears:
 1. Between consecutive members (or initializers) of a class: fields, constructors, methods, nested classes, static initializers, instance initializers.
     * **Exception**: A blank line between two consecutive fields (having no other code between them) is optional. Such blank lines are used as needed to create logical groupings of fields.
 2. Within method bodies, as needed to create logical groupings of statements.
-3. Before the first member and after the last member of the class.
+3. Before the first member and after the last member of the type/extension declaration.
 4. As required by other sections of this document.
 
 Multiple consecutive blank lines are not permitted.
@@ -181,6 +181,7 @@ class Car : Vehicle {
     func temperatureStatusDescription() -> String {
       return temperature > 28 ? "To much hot, turn on air conditioner":"Great temperature condition"
     }
+
 }
 ```
 
@@ -198,6 +199,46 @@ let numberOfWheels = 4
 **not prefered**
 ```swift
 let numberOfWheels = 4;
+```
+
+### Imports
+
+Refer to [Import Declarations from Apple Doc].
+
+Imports should be declared at top of each Swift file and alphabetically (ignoraing case) sorted. There could be any number of comments before the first import sentence.
+
+Keep imports that declare a `kind` first ordered by their `kind` after imports that don't do it. Optionally, group imports by kind declaration into logical blocks.
+
+Imports marked with `@testable` should be put at the end of the list of imports. Optionally, add an empty line in order to group normal imports and `@testable` imports in two different logical blocks.
+
+Avoid duplicated imports.
+
+**prefered**
+```swift
+// Comments are allowed before imports
+
+import Foundation
+import UIKit
+import test
+
+import class MyApp.MyClassA
+import class MyApp.MyClassB
+
+import enum MyApp.MyEnum
+
+import struct MyApp.Struct
+
+@testable import MyApp
+```
+
+**not prefered**
+```swift
+// Comments are allowed before imports
+
+import UIKit
+@testable import MyApp
+import Foundation
+
 ```
 
 ### Methods
@@ -233,6 +274,7 @@ Only use `self` when strictly necessary. For instance within closures or to disa
 
 ```swift
 class Person {
+
   let name: String
   var skills = []
 
@@ -243,6 +285,7 @@ class Person {
   func resetSkills() {
     skills = [] // Note that we don't use self here
   }
+
 }
 ```
 
@@ -298,7 +341,7 @@ var vehicleTwo: Vehicle? = ...
 **prefered**
 
 ```swift
-if let vehicleOne = vehicleOne, vehicleTwo = vehicleTwo where vehicleOne.currentSpeed > vehicleTwo.currentSpeed {
+if let vehicleOne = vehicleOne, vehicleTwo = vehicleTwo, vehicleOne.currentSpeed > vehicleTwo.currentSpeed {
     print("\(vehicleOne) is faster than \(vehicleTwo)")
 }
 ```
@@ -371,8 +414,7 @@ switchControl?.on = row.value ?? false
 ```swift
 if let value = row.value {
     switchControl?.on = value
-}
-else {
+} else {
     switchControl?.on = false
 }
 ```
@@ -383,7 +425,9 @@ Prefer to use `?` over `!` if the property/variable value can be nil.
 
 ```swift
 class BaseRow {
+
     var section: Section? // can be nil at any time, we should use ?
+
 }
 ```
 
@@ -597,15 +641,17 @@ subscript(index: Int) -> Passenger {
 
 #### Enumerations
 
-Enumeration values should be begin with a capital letter.
+Enumeration values should be begin with a lowercase letter.
 One option per line.
 
 **prefered**
 
 ```swift
 public enum HeaderFooterType {
-    case Header
-    case Footer
+
+    case header
+    case footer
+
 }
 ```
 
@@ -613,12 +659,16 @@ public enum HeaderFooterType {
 
 ```swift
 public enum HeaderFooterType {
+
     case Header, Footer
+
 }
 // or
 public enum HeaderFooterType {
-    case header
-    case footer
+
+    case Header
+    case Footer
+
 }
 ```
 
@@ -631,17 +681,17 @@ Usually enum type can be inferred and in these cases we prefer the short dot syn
 
 ```swift
 var directionToHead = CompassPoint.West // same as var directionToHead: CompassPoint = .West
-directionToHead = .East
+directionToHead = .east
 ..
-headToDirection(.West)
+headToDirection(.west)
 ```
 
 **not prefered**
 
 ```swift
-var directionToHead = CompassPoint.West
-directionToHead = CompassPoint.East // here the type of directionToHead is already know so the CompassPoint type is unnecessary.
-headtoDirection(CompassPoint.West)
+var directionToHead = CompassPoint.west
+directionToHead = CompassPoint.east // here the type of directionToHead is already know so the CompassPoint type is unnecessary.
+headtoDirection(CompassPoint.west)
 ```
 
 ##### Multiple cases in the same line
@@ -711,10 +761,24 @@ catch {
 ```
 
 
---------------------------------------------
+## SwiftLint
 
 Some of the style and syntaxis conventions we follow are checked using [SwiftLint](https://github.com/realm/SwiftLint) realm project.
+
+### Default configuration
+
+1. Just explicitly disable next rules:
+  - valid_docs
+  - variable_name
+  - variable_name_min_length
+2. Enable next opt-in rules
+  - sorted_imports
+  - closure_end_indentation
+  - force_unwrapping
+
+--------------------------------------------
 
 This guide may suffer changes due to swift language evolution.
 
 We would love to hear your ideas! Feel free to contribute by creating a pull request!
+
